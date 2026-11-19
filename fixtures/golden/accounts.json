@@ -1,0 +1,934 @@
+[
+  {
+    "account": {
+      "domain": "brightforge.example",
+      "company": "Brightforge Robotics",
+      "website": "https://www.brightforge.example/",
+      "industry": "Industrial robotics",
+      "employees": 240,
+      "contact": {
+        "first_name": "Maya",
+        "last_name": "Chen",
+        "title": "VP Finance",
+        "email": "maya.chen@brightforge.example"
+      }
+    },
+    "site": {
+      "tagline": "Palletizing robots for food and beverage plants.",
+      "about": [
+        "Brightforge Robotics builds palletizing robots for food and beverage plants.",
+        "The company operates two assembly sites in Ohio and Ontario."
+      ],
+      "news": [
+        "Brightforge shipped its 500th robot cell this summer."
+      ]
+    },
+    "signals": [
+      {
+        "kind": "funding",
+        "date": "2026-09-12",
+        "text": "Brightforge Robotics raised an $18M Series B led by Granite Peak Ventures.",
+        "url": "https://news.example/brightforge-series-b"
+      },
+      {
+        "kind": "hiring",
+        "date": "2026-10-02",
+        "text": "Brightforge Robotics is hiring two Accounts Payable Specialists in Columbus.",
+        "url": "https://news.example/brightforge-ap-jobs"
+      }
+    ],
+    "crm": {
+      "domain": "brightforge.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "funding"
+    }
+  },
+  {
+    "account": {
+      "domain": "copperline.example",
+      "company": "Copperline Logistics",
+      "website": "https://www.copperline.example/",
+      "industry": "Third-party logistics",
+      "employees": 610,
+      "contact": {
+        "first_name": "Daniel",
+        "last_name": "Okafor",
+        "title": "Controller",
+        "email": "daniel.okafor@copperline.example"
+      }
+    },
+    "site": {
+      "tagline": "Contract warehousing and freight for mid-size retailers.",
+      "about": [
+        "Copperline Logistics operates 14 warehouses across North America.",
+        "Copperline serves more than 300 retail brands."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "expansion",
+        "date": "2026-08-20",
+        "text": "Copperline Logistics opened distribution centers in Rotterdam and Monterrey, its first outside the US.",
+        "url": "https://news.example/copperline-eu-mx"
+      },
+      {
+        "kind": "hiring",
+        "date": "2026-09-15",
+        "text": "Copperline Logistics is hiring an Accounts Payable Manager for its Dallas office.",
+        "url": "https://news.example/copperline-ap-manager"
+      }
+    ],
+    "crm": {
+      "domain": "copperline.example",
+      "status": "new",
+      "owner": "jlee",
+      "last_touch": null,
+      "notes": "Met at FreightTech 2025 booth."
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "expansion"
+    }
+  },
+  {
+    "account": {
+      "domain": "fernway.example",
+      "company": "Fernway Health Supply",
+      "website": "https://www.fernway.example/",
+      "industry": "Medical supply distribution",
+      "employees": 380,
+      "contact": {
+        "first_name": "Priya",
+        "last_name": "Nair",
+        "title": "CFO",
+        "email": "priya.nair@fernway.example"
+      }
+    },
+    "site": {
+      "tagline": "Medical and surgical supplies for independent clinics.",
+      "about": [
+        "Fernway Health Supply distributes surgical and diagnostic supplies to 2,400 clinics."
+      ],
+      "news": [
+        "Fernway opened a second fulfillment hub in Reno."
+      ]
+    },
+    "signals": [
+      {
+        "kind": "tech_change",
+        "date": "2026-09-30",
+        "text": "Fernway Health Supply is migrating its finance stack from QuickBooks to NetSuite this quarter.",
+        "url": "https://news.example/fernway-netsuite"
+      }
+    ],
+    "crm": {
+      "domain": "fernway.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "tech_change"
+    }
+  },
+  {
+    "account": {
+      "domain": "harborlight.example",
+      "company": "Harborlight Foods",
+      "website": "https://www.harborlight.example/",
+      "industry": "Food manufacturing",
+      "employees": 520,
+      "contact": {
+        "first_name": "Tom",
+        "last_name": "Becker",
+        "title": "Director of Finance",
+        "email": "tom.becker@harborlight.example"
+      }
+    },
+    "site": {
+      "tagline": "Private-label sauces and dressings.",
+      "about": [
+        "Harborlight Foods supplies 1,200 grocery stores across the Midwest.",
+        "Harborlight runs three production plants in Wisconsin."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "leadership",
+        "date": "2026-10-06",
+        "text": "Harborlight Foods appointed Elena Ruiz as Chief Financial Officer in October 2026.",
+        "url": "https://news.example/harborlight-cfo"
+      }
+    ],
+    "crm": {
+      "domain": "harborlight.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "leadership"
+    }
+  },
+  {
+    "account": {
+      "domain": "northpeak.example",
+      "company": "Northpeak Outdoor",
+      "website": "https://www.northpeak.example/",
+      "industry": "Outdoor retail and e-commerce",
+      "employees": 190,
+      "contact": {
+        "first_name": "Sofia",
+        "last_name": "Lindqvist",
+        "title": "Head of Finance",
+        "email": "sofia.lindqvist@northpeak.example"
+      }
+    },
+    "site": {
+      "tagline": "Technical outdoor apparel, sold online and through partners.",
+      "about": [
+        "Northpeak Outdoor designs technical shells and insulation layers in Denver."
+      ],
+      "news": [
+        "Northpeak now ships to customers in 22 countries."
+      ]
+    },
+    "signals": [
+      {
+        "kind": "launch",
+        "date": "2026-09-01",
+        "text": "Northpeak Outdoor launched a wholesale channel with 40 new retail partners.",
+        "url": "https://news.example/northpeak-wholesale"
+      }
+    ],
+    "crm": {
+      "domain": "northpeak.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "launch"
+    }
+  },
+  {
+    "account": {
+      "domain": "quarrystone.example",
+      "company": "Quarrystone Construction",
+      "website": "https://www.quarrystone.example/",
+      "industry": "Commercial construction",
+      "employees": 870,
+      "contact": {
+        "first_name": null,
+        "last_name": "Alvarez",
+        "title": "Finance Director",
+        "email": "finance.alvarez@quarrystone.example"
+      }
+    },
+    "site": {
+      "tagline": "General contracting for healthcare and education buildings.",
+      "about": [
+        "Quarrystone Construction delivers hospitals, schools and laboratories across Texas."
+      ],
+      "news": [
+        "Quarrystone completed 31 projects in 2025."
+      ]
+    },
+    "signals": [
+      {
+        "kind": "hiring",
+        "date": "2026-10-10",
+        "text": "Quarrystone Construction is hiring an Accounts Payable Manager to support 60 active job sites.",
+        "url": "https://news.example/quarrystone-ap-manager"
+      }
+    ],
+    "crm": {
+      "domain": "quarrystone.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "hiring"
+    }
+  },
+  {
+    "account": {
+      "domain": "bluefin.example",
+      "company": "Bluefin Analytics",
+      "website": "https://www.bluefin.example/",
+      "industry": "B2B SaaS",
+      "employees": 150,
+      "contact": {
+        "first_name": "Arjun",
+        "last_name": "Mehta",
+        "title": "Controller",
+        "email": "arjun.mehta@bluefin.example"
+      }
+    },
+    "site": {
+      "tagline": "Demand forecasting for consumer brands.",
+      "about": [
+        "Bluefin Analytics forecasts demand for 180 consumer brands."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "funding",
+        "date": "2026-07-22",
+        "text": "Bluefin Analytics closed a $32M Series C to expand into Europe.",
+        "url": "https://news.example/bluefin-series-c"
+      }
+    ],
+    "crm": {
+      "domain": "bluefin.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "funding"
+    }
+  },
+  {
+    "account": {
+      "domain": "kestrel.example",
+      "company": "Kestrel Aerospace Parts",
+      "website": "https://www.kestrel.example/",
+      "industry": "Aerospace manufacturing",
+      "employees": 1100,
+      "contact": {
+        "first_name": "Hannah",
+        "last_name": "Wolfe",
+        "title": "VP Finance",
+        "email": "hannah.wolfe@kestrel.example"
+      }
+    },
+    "site": {
+      "tagline": "Precision machined parts for aircraft interiors.",
+      "about": [
+        "Kestrel Aerospace Parts machines seat and galley components."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "funding",
+        "date": "2026-06-01",
+        "text": "Kestrel Aerospace Parts raised $40M in growth financing.",
+        "url": "https://news.example/kestrel-growth"
+      }
+    ],
+    "crm": {
+      "domain": "kestrel.example",
+      "status": "do_not_contact",
+      "owner": "mpatel",
+      "last_touch": null,
+      "notes": "Asked to be removed from all outreach in 2025."
+    },
+    "expect": {
+      "status": "halted",
+      "angle_kind": null
+    }
+  },
+  {
+    "account": {
+      "domain": "lumenfield.example",
+      "company": "Lumenfield Energy",
+      "website": "https://www.lumenfield.example/",
+      "industry": "Solar installation",
+      "employees": 430,
+      "contact": {
+        "first_name": "Marcus",
+        "last_name": "Reed",
+        "title": "CFO",
+        "email": "marcus.reed@lumenfield.example"
+      }
+    },
+    "site": {
+      "tagline": "Commercial rooftop solar.",
+      "about": [
+        "Lumenfield Energy installs rooftop solar for warehouses and schools."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "expansion",
+        "date": "2026-08-11",
+        "text": "Lumenfield Energy expanded into Arizona and Nevada.",
+        "url": "https://news.example/lumenfield-expansion"
+      }
+    ],
+    "crm": {
+      "domain": "lumenfield.example",
+      "status": "customer",
+      "owner": "agarcia",
+      "last_touch": null,
+      "notes": "Customer since 2024."
+    },
+    "expect": {
+      "status": "halted",
+      "angle_kind": null
+    }
+  },
+  {
+    "account": {
+      "domain": "oakridge.example",
+      "company": "Oakridge Dental Group",
+      "website": "https://www.oakridge.example/",
+      "industry": "Dental services",
+      "employees": 650,
+      "contact": {
+        "first_name": "Leah",
+        "last_name": "Goldberg",
+        "title": "Controller",
+        "email": "leah.goldberg@oakridge.example"
+      }
+    },
+    "site": {
+      "tagline": "Dental practices with shared operations.",
+      "about": [
+        "Oakridge Dental Group operates 48 practices in the Midwest."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "expansion",
+        "date": "2026-09-18",
+        "text": "Oakridge Dental Group acquired 12 dental practices across Ohio.",
+        "url": "https://news.example/oakridge-acquisition"
+      }
+    ],
+    "crm": {
+      "domain": "oakridge.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "expansion"
+    }
+  },
+  {
+    "account": {
+      "domain": "pinecrest.example",
+      "company": "Pinecrest Hospitality",
+      "website": "https://www.pinecrest.example/",
+      "industry": "Hotels",
+      "employees": 900,
+      "contact": {
+        "first_name": "Carlos",
+        "last_name": "Mendes",
+        "title": "Director of Finance",
+        "email": "carlos.mendes@pinecrest.example"
+      }
+    },
+    "site": {
+      "tagline": "Boutique hotels in mountain towns.",
+      "about": [
+        "Pinecrest Hospitality operates 19 boutique hotels in Colorado and Utah."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "tech_change",
+        "date": "2026-10-01",
+        "text": "Pinecrest Hospitality is rolling out Microsoft Dynamics 365 Finance across its hotels.",
+        "url": "https://news.example/pinecrest-dynamics"
+      },
+      {
+        "kind": "hiring",
+        "date": "2026-10-12",
+        "text": "Pinecrest Hospitality is hiring a Senior AP Specialist.",
+        "url": "https://news.example/pinecrest-ap"
+      }
+    ],
+    "crm": {
+      "domain": "pinecrest.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "tech_change"
+    }
+  },
+  {
+    "account": {
+      "domain": "ridgeway.example",
+      "company": "Ridgeway Freight",
+      "website": "https://www.ridgeway.example/",
+      "industry": "Trucking",
+      "employees": 340,
+      "contact": {
+        "first_name": "Grace",
+        "last_name": "Kim",
+        "title": "Controller",
+        "email": "grace.kim@ridgeway.example"
+      }
+    },
+    "site": {
+      "tagline": "Regional less-than-truckload carrier.",
+      "about": [
+        "Ridgeway Freight runs a fleet of 420 trucks across the Southeast."
+      ],
+      "news": [
+        "Ridgeway Freight earned a regional carrier safety award."
+      ]
+    },
+    "signals": [],
+    "crm": {
+      "domain": "ridgeway.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "needs_human",
+      "angle_kind": null
+    }
+  },
+  {
+    "account": {
+      "domain": "saltmarsh.example",
+      "company": "Saltmarsh Brewing",
+      "website": "https://www.saltmarsh.example/",
+      "industry": "Beverages",
+      "employees": 120,
+      "contact": {
+        "first_name": "Owen",
+        "last_name": "Price",
+        "title": "Finance Manager",
+        "email": "owen.price@saltmarsh.example"
+      }
+    },
+    "site": {
+      "tagline": "Coastal craft beer.",
+      "about": [
+        "Saltmarsh Brewing brews lagers and sours in Charleston."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "launch",
+        "date": "2026-08-28",
+        "text": "Saltmarsh Brewing launched a canned line in 300 stores across the Carolinas.",
+        "url": "https://news.example/saltmarsh-cans"
+      }
+    ],
+    "crm": {
+      "domain": "saltmarsh.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "launch"
+    }
+  },
+  {
+    "account": {
+      "domain": "tidewater.example",
+      "company": "Tidewater Marine",
+      "website": "https://www.tidewater.example/",
+      "industry": "Marine equipment",
+      "employees": 275,
+      "contact": {
+        "first_name": "Isabel",
+        "last_name": "Duarte",
+        "title": "VP Finance",
+        "email": "isabel.duarte@tidewater.example"
+      }
+    },
+    "site": {
+      "tagline": "Engines and parts for commercial vessels.",
+      "about": [
+        "Tidewater Marine supplies engines and parts to 900 commercial fleets."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "leadership",
+        "date": "2026-09-22",
+        "text": "Tidewater Marine named Ravi Shah as Corporate Controller.",
+        "url": "https://news.example/tidewater-controller"
+      }
+    ],
+    "crm": {
+      "domain": "tidewater.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "leadership"
+    }
+  },
+  {
+    "account": {
+      "domain": "umberto.example",
+      "company": "Umberto Textiles",
+      "website": "https://www.umberto.example/",
+      "industry": "Textiles",
+      "employees": 410,
+      "contact": {
+        "first_name": "Luca",
+        "last_name": "Romano",
+        "title": "CFO",
+        "email": "luca.romano@umberto.example"
+      }
+    },
+    "site": {
+      "tagline": "Technical fabrics for furniture and automotive interiors.",
+      "about": [
+        "Umberto Textiles weaves technical fabrics in North Carolina."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "expansion",
+        "date": "2026-07-30",
+        "text": "Umberto Textiles set up a new legal entity in Portugal to run a second mill.",
+        "url": "https://news.example/umberto-portugal"
+      }
+    ],
+    "crm": {
+      "domain": "umberto.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "expansion"
+    }
+  },
+  {
+    "account": {
+      "domain": "vantageclinics.example",
+      "company": "Vantage Clinics",
+      "website": "https://www.vantageclinics.example/",
+      "industry": "Healthcare services",
+      "employees": 560,
+      "contact": {
+        "first_name": "Nora",
+        "last_name": "Ahmed",
+        "title": "Controller",
+        "email": "nora.ahmed@vantageclinics.example"
+      }
+    },
+    "site": {
+      "tagline": "Urgent care clinics.",
+      "about": [
+        "Vantage Clinics operates 37 urgent care clinics in Georgia and Florida."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "funding",
+        "date": "2026-09-05",
+        "text": "Vantage Clinics raised a $45M growth round from Harbor Health Partners.",
+        "url": "https://news.example/vantage-growth"
+      },
+      {
+        "kind": "expansion",
+        "date": "2026-09-25",
+        "text": "Vantage Clinics plans to open 15 clinics in Tennessee.",
+        "url": "https://news.example/vantage-tn"
+      }
+    ],
+    "crm": {
+      "domain": "vantageclinics.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "funding"
+    }
+  },
+  {
+    "account": {
+      "domain": "willowbank.example",
+      "company": "Willowbank Education",
+      "website": "https://www.willowbank.example/",
+      "industry": "EdTech",
+      "employees": 130,
+      "contact": {
+        "first_name": "Ethan",
+        "last_name": "Brooks",
+        "title": "Head of Finance",
+        "email": "ethan.brooks@willowbank.example"
+      }
+    },
+    "site": {
+      "tagline": "Tutoring software for school districts.",
+      "about": [
+        "Willowbank Education serves 85 school districts."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "hiring",
+        "date": "2026-10-08",
+        "text": "Willowbank Education is hiring its first dedicated Accounts Payable Specialist.",
+        "url": "https://news.example/willowbank-ap"
+      }
+    ],
+    "crm": {
+      "domain": "willowbank.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "hiring"
+    }
+  },
+  {
+    "account": {
+      "domain": "xenith.example",
+      "company": "Xenith Labs",
+      "website": "https://www.xenith.example/",
+      "industry": "Biotech",
+      "employees": 220,
+      "contact": {
+        "first_name": "Ava",
+        "last_name": "Patel",
+        "title": "Finance Director",
+        "email": "ava.patel@xenith.example"
+      }
+    },
+    "site": {
+      "tagline": "Contract research for cell therapies.",
+      "about": [
+        "Xenith Labs runs contract research programs for 60 biotech sponsors."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "tech_change",
+        "date": "2026-08-15",
+        "text": "Xenith Labs selected SAP S/4HANA Cloud to replace its legacy accounting system.",
+        "url": "https://news.example/xenith-sap"
+      }
+    ],
+    "crm": {
+      "domain": "xenith.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "tech_change"
+    }
+  },
+  {
+    "account": {
+      "domain": "yellowpine.example",
+      "company": "Yellowpine Furniture",
+      "website": "https://www.yellowpine.example/",
+      "industry": "Furniture manufacturing",
+      "employees": 480,
+      "contact": {
+        "first_name": null,
+        "last_name": "Novak",
+        "title": "Controller",
+        "email": "finance.novak@yellowpine.example"
+      }
+    },
+    "site": {
+      "tagline": "Solid wood furniture.",
+      "about": [
+        "Yellowpine Furniture builds solid wood furniture in two plants in Michigan."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "leadership",
+        "date": "2026-10-03",
+        "text": "Yellowpine Furniture promoted Dana Wills to Vice President of Finance.",
+        "url": "https://news.example/yellowpine-vpf"
+      }
+    ],
+    "crm": {
+      "domain": "yellowpine.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "leadership"
+    }
+  },
+  {
+    "account": {
+      "domain": "zephyr.example",
+      "company": "Zephyr Mobility",
+      "website": "https://www.zephyr.example/",
+      "industry": "EV fleet services",
+      "employees": 300,
+      "contact": {
+        "first_name": "Kenji",
+        "last_name": "Watanabe",
+        "title": "CFO",
+        "email": "kenji.watanabe@zephyr.example"
+      }
+    },
+    "site": {
+      "tagline": "Electric fleet charging and maintenance.",
+      "about": [
+        "Zephyr Mobility maintains 6,000 electric delivery vans."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "funding",
+        "date": "2026-08-03",
+        "text": "Zephyr Mobility raised a $60M Series C.",
+        "url": "https://news.example/zephyr-series-c"
+      },
+      {
+        "kind": "expansion",
+        "date": "2026-09-09",
+        "text": "Zephyr Mobility expanded to Toronto and Vancouver.",
+        "url": "https://news.example/zephyr-canada"
+      }
+    ],
+    "crm": {
+      "domain": "zephyr.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "funding"
+    }
+  },
+  {
+    "account": {
+      "domain": "amberly.example",
+      "company": "Amberly Pet Care",
+      "website": "https://www.amberly.example/",
+      "industry": "Pet retail",
+      "employees": 700,
+      "contact": {
+        "first_name": "Rachel",
+        "last_name": "Stone",
+        "title": "VP Finance",
+        "email": "rachel.stone@amberly.example"
+      }
+    },
+    "site": {
+      "tagline": "Neighborhood pet stores and grooming.",
+      "about": [
+        "Amberly Pet Care operates 120 pet stores."
+      ],
+      "news": []
+    },
+    "signals": [
+      {
+        "kind": "hiring",
+        "date": "2026-09-29",
+        "text": "Amberly Pet Care is hiring an AP Supervisor.",
+        "url": "https://news.example/amberly-ap"
+      }
+    ],
+    "crm": {
+      "domain": "amberly.example",
+      "status": "open_opportunity",
+      "owner": "tnguyen",
+      "last_touch": null,
+      "notes": "Active evaluation, stage 2."
+    },
+    "expect": {
+      "status": "halted",
+      "angle_kind": null
+    }
+  },
+  {
+    "account": {
+      "domain": "birchmont.example",
+      "company": "Birchmont Legal Services",
+      "website": "https://www.birchmont.example/",
+      "industry": "Legal services",
+      "employees": 260,
+      "contact": {
+        "first_name": "Samuel",
+        "last_name": "Ortiz",
+        "title": "Director of Finance",
+        "email": "samuel.ortiz@birchmont.example"
+      }
+    },
+    "site": null,
+    "signals": [
+      {
+        "kind": "hiring",
+        "date": "2026-10-14",
+        "text": "Birchmont Legal Services is hiring an Accounts Payable Coordinator.",
+        "url": "https://news.example/birchmont-ap"
+      }
+    ],
+    "crm": {
+      "domain": "birchmont.example",
+      "status": "new",
+      "owner": null,
+      "last_touch": null,
+      "notes": ""
+    },
+    "expect": {
+      "status": "ready",
+      "angle_kind": "hiring"
+    }
+  }
+]

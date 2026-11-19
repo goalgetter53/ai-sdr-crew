@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Lint
+        run: |
+          ruff check src tests
+          ruff format --check src tests
+      - name: Type check
+        run: mypy
+      - name: Tests
+        run: pytest
+      - name: Red-team gate (all guardrails on must stay 0/14)
+        run: sdr-crew redteam
+      - name: Prompt regression report (mock mode)
+        run: |
+          sdr-crew eval --prompt-version v1
+          sdr-crew eval --prompt-version v2
+          sdr-crew compare reports/eval_v1.json reports/eval_v2.json

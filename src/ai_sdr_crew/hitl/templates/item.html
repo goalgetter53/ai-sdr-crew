@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}{{ item.company }}{% endblock %}
+{% block content %}
+<h1>{{ item.company }} <span class="pill {{ item.status }}">{{ item.status }}</span></h1>
+<p class="muted">{{ item.contact.first_name or "" }} {{ item.contact.last_name }}, {{ item.contact.title }} · {{ item.contact.email }} · run {{ item.run_id }} · pipeline: {{ item.run_status }}{% if item.reason %} ({{ item.reason }}){% endif %}</p>
+
+{% if errors %}
+<div class="card"><strong class="bad">Action blocked</strong>
+  <ul class="issues">{% for i in errors %}<li class="bad">{{ i.code }}: {{ i.message }}{% if i.location %} [{{ i.location }}]{% endif %}</li>{% endfor %}</ul>
+</div>
+{% endif %}
+
+<div class="card">
+  <strong>Checks on current copy</strong>
+  {% if not blocking and not warnings %}<p class="muted">All deterministic checks pass.</p>{% endif %}
+  <ul class="issues">
+    {% for i in blocking %}<li class="bad">BLOCKING {{ i.code }}: {{ i.message }}{% if i.location %} [{{ i.location }}]{% endif %}</li>{% endfor %}
+    {% for i in warnings %}<li class="warn">warning {{ i.code }}: {{ i.message }}{% if i.location %} [{{ i.location }}]{% endif %}</li>{% endfor %}
+    {% for f in item.flags %}<li class="warn">pipeline flag: {{ f }}</li>{% endfor %}
+  </ul>
+</div>
+
+<div class="card">
+  <strong>Evidence (grounded research facts)</strong>
+  <ul>{% for f in item.facts %}<li><code>{{ f.id }}</code> [{{ f.kind }}] {{ f.text }} <span class="muted">({{ f.source_tool }}: {{ f.source_ref }})</span></li>{% endfor %}</ul>
+</div>
+
+{% for s in item.sequence.steps %}
+<div class="card">
+  <strong>Email {{ s.step }}</strong> <span class="muted">day +{{ s.delay_days }}</span>
+  <p><em>{{ s.subject }}</em></p>
+  <pre>{{ s.body }}</pre>
+</div>
+{% endfor %}
+<div class="card"><strong>LinkedIn note</strong><pre>{{ item.sequence.linkedin_note }}</pre></div>
+
+{% if item.status == "pending" %}
+<div class="card row">
+  <form method="post" action="/items/{{ item.id }}/approve" class="row">
+    <input type="text" name="reviewer" value="sdr" aria-label="reviewer" style="width:120px">
+    <button class="primary" type="submit">Approve</button>
+  </form>
+  <form method="post" action="/items/{{ item.id }}/reject" class="row">
+    <input type="text" name="note" placeholder="reason (optional)" aria-label="reject reason" style="width:240px">
+    <button type="submit">Reject</button>
+  </form>
+</div>
+
+<div class="card">
+  <strong>Edit</strong> <span class="muted">Citation markers like [F1] are stripped on export. Edits are re-linted; blocking issues prevent approval.</span>
+  <form method="post" action="/items/{{ item.id }}/edit">
+    {% for s in item.sequence.steps %}
+    <label for="s{{ s.step }}s">Email {{ s.step }} subject</label>
+    <input type="text" id="s{{ s.step }}s" name="step{{ s.step }}_subject" value="{{ s.subject }}">
+    <label for="s{{ s.step }}b">Email {{ s.step }} body</label>
+    <textarea id="s{{ s.step }}b" name="step{{ s.step }}_body">{{ s.body }}</textarea>
+    {% endfor %}
+    <label for="li">LinkedIn note</label>
+    <textarea id="li" name="linkedin_note" style="min-height:70px">{{ item.sequence.linkedin_note }}</textarea>
+    <input type="hidden" name="reviewer" value="sdr">
+    <p><button class="primary" type="submit">Save edits</button></p>
+  </form>
+</div>
+{% endif %}
+{% endblock %}

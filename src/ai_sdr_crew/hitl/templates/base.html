@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Approval queue{% endblock %} | ai-sdr-crew</title>
+<style>
+  :root { --ink:#1d2330; --muted:#6b7385; --line:#e3e6ec; --ok:#1f7a4d; --warn:#9a6700; --bad:#b42318; --bg:#f7f8fa; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); background:var(--bg); }
+  header { background:#fff; border-bottom:1px solid var(--line); padding:12px 24px; display:flex; gap:24px; align-items:center; }
+  header strong { font-size:16px; }
+  header nav a { margin-right:14px; color:var(--muted); text-decoration:none; }
+  header nav a.on { color:var(--ink); font-weight:600; }
+  main { max-width:980px; margin:24px auto; padding:0 24px; }
+  table { width:100%; border-collapse:collapse; background:#fff; border:1px solid var(--line); }
+  th, td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-size:12px; text-transform:uppercase; letter-spacing:.04em; color:var(--muted); }
+  .pill { display:inline-block; padding:1px 8px; border-radius:999px; font-size:12px; border:1px solid var(--line); }
+  .ready, .approved { color:var(--ok); } .needs_human, .pending { color:var(--warn); } .rejected { color:var(--bad); }
+  .card { background:#fff; border:1px solid var(--line); border-radius:8px; padding:16px 20px; margin-bottom:16px; }
+  .issues li { margin:2px 0; } .bad { color:var(--bad); } .warn { color:var(--warn); }
+  label { display:block; font-size:12px; color:var(--muted); margin-top:10px; }
+  input[type=text], textarea { width:100%; font:inherit; padding:8px; border:1px solid var(--line); border-radius:6px; }
+  textarea { min-height:140px; }
+  button { font:inherit; padding:7px 16px; border-radius:6px; border:1px solid var(--line); background:#fff; cursor:pointer; }
+  button.primary { background:var(--ink); color:#fff; border-color:var(--ink); }
+  .row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  pre { white-space:pre-wrap; font:inherit; margin:0; }
+  .muted { color:var(--muted); font-size:13px; }
+</style>
+</head>
+<body>
+<header>
+  <strong>ai-sdr-crew</strong>
+  <nav>
+    <a href="/?status=pending">Pending</a>
+    <a href="/?status=approved">Approved</a>
+    <a href="/?status=rejected">Rejected</a>
+    <a href="/">All</a>
+    <a href="/export.csv?fmt=instantly">Export Instantly CSV</a>
+    <a href="/export.csv?fmt=smartlead">Export Smartlead CSV</a>
+  </nav>
+</header>
+<main>
+{% block content %}{% endblock %}
+<p class="muted">Nothing is sent from here. Approved sequences leave only as a CSV you import into your sending tool.</p>
+</main>
+</body>
+</html>

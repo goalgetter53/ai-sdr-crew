@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Queue{% endblock %}
+{% block content %}
+<h1>Approval queue{% if status %}: {{ status }}{% endif %}</h1>
+<p class="muted">pending {{ counts.pending }} · approved {{ counts.approved }} · rejected {{ counts.rejected }}</p>
+<table>
+  <thead><tr><th>#</th><th>Account</th><th>Contact</th><th>Pipeline</th><th>Review</th><th>Flags</th></tr></thead>
+  <tbody>
+  {% for item in items %}
+    <tr>
+      <td><a href="/items/{{ item.id }}">{{ item.id }}</a></td>
+      <td><a href="/items/{{ item.id }}">{{ item.company }}</a><br><span class="muted">{{ item.domain }}</span></td>
+      <td>{{ item.contact.first_name or "" }} {{ item.contact.last_name }}<br><span class="muted">{{ item.contact.title }}</span></td>
+      <td><span class="pill {{ item.run_status }}">{{ item.run_status }}</span></td>
+      <td><span class="pill {{ item.status }}">{{ item.status }}</span>{% if item.edited %} <span class="muted">edited</span>{% endif %}</td>
+      <td>{% if item.flags %}<span class="warn">{{ item.flags|length }} flag(s)</span>{% else %}<span class="muted">none</span>{% endif %}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="6" class="muted">Queue is empty. Run <code>sdr-crew demo</code> to fill it.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
