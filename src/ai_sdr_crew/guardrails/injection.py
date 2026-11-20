@@ -6,7 +6,10 @@ bidi controls removed, common homoglyphs folded) -> sentence-level instruction-p
 (including base64-decoded blobs) -> flagged sentences replaced with a redaction marker -> markup
 characters neutralised -> wrapped in a quarantined <untrusted_content> block.
 
-Regex detection is one layer, not a guarantee; see ADR-0002 for the other layers.
+Regex detection is one layer, not a guarantee; see ADR-0002 for the other layers. A second,
+model-based layer (guardrails/injection_model.py) scores each visible text block (one line of the
+extracted text: a paragraph, list item, heading ...) and redacts the whole block when it fires.
+A sentence is redacted if regex OR classifier flags it.
 """
 
 from __future__ import annotations
@@ -18,6 +21,8 @@ import unicodedata
 from dataclasses import dataclass, field
 from html import escape
 from html.parser import HTMLParser
+
+from ai_sdr_crew.guardrails.injection_model import InjectionClassifier, default_classifier
 
 REDACTED = "[removed: suspected prompt injection]"
 
@@ -357,8 +362,17 @@ def _neutralise_markup(text: str) -> str:
 
 
 def quarantine(
-    raw: str, source: str, source_id: str, rules: Rules | None = None
+    raw: str,
+    source: str,
+    source_id: str,
+    rules: Rules | None = None,
+    *,
+    use_classifier: bool = True,
+    classifier: InjectionClassifier | None = None,
 ) -> QuarantineResult:
+    """Sanitise one fetched page. `use_classifier=False` gives the regex-only (pre-model) path;
+    `classifier=None` means the shipped model (lazily loaded; skipped if missing or disabled)."""
+    clf = (classifier or default_classifier()) if use_classifier else None
     visible_raw, hidden = extract(raw)
     findings: list[Finding] = []
     for location, segment in hidden:
@@ -366,15 +380,22 @@ def quarantine(
 
     kept: list[str] = []
     redacted = 0
-    for sentence in split_sentences(normalize(visible_raw)):
-        hits = detect(sentence, "visible", rules)
-        if hits:
-            findings.extend(hits)
-            redacted += 1
-            if not kept or kept[-1] != REDACTED:
-                kept.append(REDACTED)
-        else:
-            kept.append(sentence)
+    for block in normalize(visible_raw).split("\n"):
+        block = block.strip()
+        if not block:
+            continue
+        model_hit = clf is not None and clf.flags(block)
+        if model_hit:
+            findings.append(Finding("classifier", "visible", block[:160]))
+        for sentence in split_sentences(block):
+            hits = detect(sentence, "visible", rules)
+            if hits or model_hit:
+                findings.extend(hits)
+                redacted += 1
+                if not kept or kept[-1] != REDACTED:
+                    kept.append(REDACTED)
+            else:
+                kept.append(sentence)
 
     body = _neutralise_markup("\n".join(kept))
     flagged = "true" if findings else "false"

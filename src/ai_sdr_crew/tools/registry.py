@@ -132,7 +132,12 @@ class Toolbox:
         if not self.guardrails.sanitize:
             return ToolOutput(result.text[:RAW_PAGE_LIMIT])
         self._sources += 1
-        q = quarantine(result.text, result.final_url, f"web-{self._sources}")
+        q = quarantine(
+            result.text,
+            result.final_url,
+            f"web-{self._sources}",
+            use_classifier=self.guardrails.injection_classifier,
+        )
         self.injection_findings.extend(f.label() for f in q.findings)
         with self.tracer.span(
             "quarantine",

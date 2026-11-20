@@ -43,6 +43,8 @@ class Guardrails:
     ssrf_guard: bool = True
     output_guard: bool = True
     grounding: bool = True
+    # Model-based second injection detector inside the sanitiser (no effect if sanitize is off).
+    injection_classifier: bool = True
 
     @classmethod
     def all_off(cls) -> Guardrails:
@@ -52,6 +54,7 @@ class Guardrails:
             ssrf_guard=False,
             output_guard=False,
             grounding=False,
+            injection_classifier=False,
         )
 
 

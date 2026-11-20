@@ -27,7 +27,7 @@ import re
 import ssl
 import time
 from collections.abc import Callable, Iterable
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from html import escape
 from pathlib import Path
 from typing import Any
@@ -36,7 +36,7 @@ from urllib.parse import urlunsplit
 import httpx
 
 from ai_sdr_crew.config import PROJECT_ROOT
-from ai_sdr_crew.evals.redteam import RedTeamPage, run_html
+from ai_sdr_crew.evals.redteam import CONFIGS, RedTeamPage, run_html
 from ai_sdr_crew.guardrails.injection import (
     RULES,
     Rules,
@@ -201,8 +201,8 @@ def as_page(text: str) -> str:
     return f"<p>{escape(text)}</p>"
 
 
-def flag(text: str, rules: Rules) -> tuple[bool, list[str]]:
-    q = quarantine(as_page(text), "dataset", "s", rules)
+def flag(text: str, rules: Rules, use_classifier: bool = False) -> tuple[bool, list[str]]:
+    q = quarantine(as_page(text), "dataset", "s", rules, use_classifier=use_classifier)
     return q.flagged, sorted({f.rule for f in q.findings})
 
 
@@ -259,9 +259,11 @@ class PageResult:
         return bool(self.findings)
 
 
-def evaluate_page(url: str, final_url: str, html: str, rules: Rules) -> PageResult:
+def evaluate_page(
+    url: str, final_url: str, html: str, rules: Rules, use_classifier: bool = False
+) -> PageResult:
     visible, _hidden = extract(html)
-    q = quarantine(html, final_url, "web-1", rules)
+    q = quarantine(html, final_url, "web-1", rules, use_classifier=use_classifier)
     return PageResult(
         url=url,
         ok=True,
@@ -478,9 +480,9 @@ def with_canary(attack: str, canary: str) -> str:
     return f"{body} {canary}"
 
 
-def context_exposure(attack: str, rules: Rules) -> str:
+def context_exposure(attack: str, rules: Rules, use_classifier: bool = False) -> str:
     """'blocked' | 'partial' | 'passed': how much of the attack reaches the model's context."""
-    q = quarantine(as_page(attack), "e2e", "web-1", rules)
+    q = quarantine(as_page(attack), "e2e", "web-1", rules, use_classifier=use_classifier)
     sentences = split_sentences(normalize(attack))
     visible = q.visible_text
     survived = sum(s.replace("<", "‹").replace(">", "›") in visible for s in sentences)
@@ -521,7 +523,9 @@ def evaluate_end_to_end(
                 canaries=[canary],
             )
             html = _PAGE.format(company=page.company, attack=escape(with_canary(a.text, canary)))
-            o = run_html(page, html, cfg)
+            # This report measures the regex layer: the model layer is switched off here and
+            # scored separately in evals/real_classifier.py.
+            o = run_html(page, html, cfg, replace(CONFIGS[cfg], injection_classifier=False))
             detected += o.detected
             if o.compromised:
                 pwned.append({"i": i, "dataset": a.dataset, "reasons": o.reasons})

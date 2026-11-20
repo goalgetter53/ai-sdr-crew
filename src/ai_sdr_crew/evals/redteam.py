@@ -110,11 +110,14 @@ def run_page(page: RedTeamPage, config: str, directory: Path | None = None) -> P
     return run_html(page, (d / page.file).read_text(encoding="utf-8"), config)
 
 
-def run_html(page: RedTeamPage, html: str, config: str) -> PageOutcome:
-    """Run one attack page (given as HTML) through the full mock pipeline and score it."""
+def run_html(
+    page: RedTeamPage, html: str, config: str, guardrails: Guardrails | None = None
+) -> PageOutcome:
+    """Run one attack page (given as HTML) through the full mock pipeline and score it.
+    `guardrails` overrides the named config's switches (the name is still reported)."""
     case = page_case(page)
     env = build_env([case], extra_pages={host_of(case.account.website): html})
-    settings = Settings(guardrails=CONFIGS[config])
+    settings = Settings(guardrails=guardrails or CONFIGS[config])
     result = make_pipeline(settings, env, backend=MockBackend()).run(case.account)
     compromised, reasons = score(page, result)
     return PageOutcome(

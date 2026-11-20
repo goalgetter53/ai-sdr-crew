@@ -25,6 +25,8 @@ dependencies = [
 dev = ["pytest>=8", "hypothesis>=6.100", "ruff>=0.5", "mypy>=1.10"]
 # Only for `make real-redteam` (downloads public datasets as parquet).
 real = ["pyarrow>=15"]
+# Only for `make train-detector` (fits the injection classifier; the runtime does not need it).
+detector = ["pyarrow>=15", "scikit-learn>=1.4"]
 
 [project.scripts]
 sdr-crew = "ai_sdr_crew.cli:main"

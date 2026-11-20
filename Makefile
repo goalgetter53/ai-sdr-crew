@@ -1,4 +1,4 @@
-.PHONY: install lint format typecheck test check eval compare redteam real-redteam ab reports demo serve docker clean-local
+.PHONY: install lint format typecheck test check eval compare redteam real-redteam train-detector ab reports demo serve docker clean-local
 
 PY ?= python
 
@@ -35,6 +35,13 @@ redteam:
 real-redteam:
 	$(PY) -m pip install -q -e ".[dev,real]"
 	$(PY) scripts/eval_real_injection.py
+
+# Fit the model-based injection detector on TRAIN, pick hyperparameters + threshold on VALIDATION,
+# score TEST once. Writes src/ai_sdr_crew/guardrails/injection_clf.json.gz (committed) and
+# reports/injection_classifier_eval.{json,md}. Uses the data/real/ cache from real-redteam.
+train-detector:
+	$(PY) -m pip install -q -e ".[dev,detector]"
+	$(PY) scripts/train_injection_detector.py
 
 ab:
 	sdr-crew ab simulate
