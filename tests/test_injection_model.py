@@ -68,6 +68,7 @@ def test_score_is_tfidf_l2_logistic() -> None:
 
 
 def test_load_gz_missing_and_env_switch(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.delenv(im.ENV_SWITCH, raising=False)
     p = tmp_path / "m.json.gz"
     p.write_bytes(gzip.compress(json.dumps(TINY).encode()))
     assert im.InjectionClassifier.load(p).threshold == 0.5
