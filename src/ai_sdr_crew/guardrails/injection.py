@@ -124,8 +124,94 @@ _RULES: tuple[tuple[str, str], ...] = (
         r"[a-z0-9._%+-]+@[a-z0-9-]+(\.[a-z0-9-]+)+",
     ),
 )
+# Added after evaluating on real public data (tuned on the datasets' train/validation splits only,
+# reported on their held-out test splits; see scripts/eval_real_injection.py and the README).
+_RULES_REAL_DATA: tuple[tuple[str, str], ...] = (
+    (
+        "override_short",
+        r"\b(ignore|disregard|forget(\s+about)?|drop|delete|reset|bypass|override|don'?t "
+        r"(follow|obey))\s+(all\s+|any\s+|the\s+|your\s+|every\s+|each\s+)?(of\s+)?(your\s+|"
+        r"the\s+|my\s+)?(previous\s+|prior\s+|above\s+|preceding\s+|earlier\s+|past\s+|"
+        r"original\s+|initial\s+|safety\s+|current\s+)?(instructions?|instrutions|directives?|"
+        r"orders|commands|rules|guidelines|restrictions|policies|techniques|text|input|"
+        r"statement|prompts?|assignments|tasks|above|previous|prior)\b",
+    ),
+    (
+        "override_everything",
+        r"\b(ignore|disregard|forget)\s+(about\s+)?everything\b.{0,40}\b(told|said|before|"
+        r"above|so far|up to now|until now|instructions?|discussed|beforehand)\b",
+    ),
+    (
+        "instructions_query",
+        r"\b(what|which|tell me|list|repeat|recite|describe|spell|change|reset|delete|invert|"
+        r"reverse|ignore|forget|disregard|override|adhere to|obey)\b.{0,30}\b(your|previous|"
+        r"prior|initial|original|preserved|the above|the previous|the initial|the original|the "
+        r"system|the hidden|all( the)?)\s+(\w+\s+)?(instructions|instrutions|intstructions|"
+        r"system prompt|prompt texts?)\b",
+    ),
+    (
+        "instructions_given",
+        r"\b(instructions?|instrutions|intstructions|prompt)\b.{0,25}\b(you (were|have been|"
+        r"got|received) given|were you given|you('ve| have) been given|given to you|you were "
+        r"given|you received)\b",
+    ),
+    (
+        "instructions_changed",
+        r"\b(your|the|all|previous)\s+(\w+\s+)?instructions?\s+(have|has|are|were)\s+(all\s+)?"
+        r"(now\s+)?(been\s+)?(changed|false|wrong|void|reset|updated|overridden)\b|\bi'?m giving "
+        r"you a new instruction\b",
+    ),
+    (
+        "password_request",
+        r"\b(reveal|tell me|give me|print|spell|show me|what is|what's|whats|say)\b.{0,25}"
+        r"\b(the|your)\s+(secret\s+)?(password|passcode|pass word)\b",
+    ),
+    (
+        "new_task_follows",
+        r"\b(now|next)\b.{0,20}\b(new|further|other|more)\s+(tasks?|instructions?|"
+        r"assignments?)\s+(follow|are following|come)\b|\b(concentrate|focus)\s+on\s+(your|the)\s+"
+        r"new\s+(task|assignment)\b|\bleave all (the )?previous information\b",
+    ),
+    (
+        "prompt_peek",
+        r"\bwhat\s+(was|is|were)\s+written\s+(above|before|at the (beginning|start|top))\b|"
+        r"\b(show|print|reveal|output|display)\b.{0,30}\bprompt[- ]texts?\b",
+    ),
+    (
+        "act_as_template",
+        r"\bi want you to act as\b|\b(stay|remain)s?\s+(fully\s+|always\s+)?in\s+(their|your)\s+"
+        r"roles?\b|\bdo not answer (this|the) question\b",
+    ),
+    (
+        "override_german",
+        r"\b(ignorier\w*|vergiss|vergessen sie|missacht\w*)\b.{0,50}\b(anweisung\w*|befehl\w*|"
+        r"aufgabe\w*|auftr[äa]g\w*|angaben|informationen|vorgab\w*|regeln|alles|obigen|"
+        r"vorherig\w*|vorangeh\w*|vorangegangen\w*)\b|\b(obigen|vorherigen|vorangegangenen)\b"
+        r".{0,40}\bignorier\w*",
+    ),
+    (
+        "new_task_german",
+        r"\b(nun|jetzt)\s+folgen\s+(neue|weitere)\s+(anweisungen|aufgaben)\b|\bkonzentrier\w*\s+"
+        r"(dich|sie sich)\s+(jetzt\s+|nun\s+)?auf\s+(deine|ihre|die)\s+neue\s+aufgabe\b|"
+        r"\bich möchte, dass (sie|du) als\b.{0,60}\b(fungier\w*|agier\w*)\b|"
+        r"\b(nun|jetzt) bist du\b|\bstell dir vor, du bist\b|\bzeig\w*\b.{0,30}\bprompt",
+    ),
+    ("override_romance", r"\b(olvida|olvide|oublie|oubliez)\s+(todo|tout)\b"),
+    (
+        "answer_directive",
+        r"\b(integrate|incorporate|weave|blend|inject|embed|insert|include|append|add|end|"
+        r"conclude|begin|start)\b.{0,80}\b(in|into|to|within|inside|throughout|with)\s+(your|the)"
+        r"\s+(\w+\s+)?(answer|response|reply|solution|codebase|implementation)s?\b",
+    ),
+    (
+        "answer_rewrite",
+        r"^\W*(modify|augment|alter|adjust|change|render|format|rewrite|encode|translate)\s+your\s+"
+        r"(\w+\s+)?(answer|response|reply|message|output)s?\b",
+    ),
+)
+
 RULES: tuple[tuple[str, re.Pattern[str]], ...] = tuple(
-    (name, re.compile(pattern, re.IGNORECASE)) for name, pattern in _RULES
+    (name, re.compile(pattern, re.IGNORECASE)) for name, pattern in _RULES + _RULES_REAL_DATA
 )
 _B64_RE = re.compile(r"(?<![A-Za-z0-9+/])[A-Za-z0-9+/]{24,}={0,2}")
 _SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+")
@@ -184,16 +270,20 @@ def _decode_b64(blob: str) -> str | None:
     return decoded if decoded and printable / len(decoded) > 0.95 else None
 
 
-def detect(text: str, location: str = "visible") -> list[Finding]:
+Rules = tuple[tuple[str, re.Pattern[str]], ...]
+
+
+def detect(text: str, location: str = "visible", rules: Rules | None = None) -> list[Finding]:
     """Scan already-normalised text sentence by sentence."""
+    active = RULES if rules is None else rules
     findings: list[Finding] = []
     for sentence in split_sentences(text):
-        for name, pattern in RULES:
+        for name, pattern in active:
             if pattern.search(sentence):
                 findings.append(Finding(name, location, sentence[:160]))
         for blob in _B64_RE.findall(sentence):
             decoded = _decode_b64(blob)
-            if decoded and detect(normalize(decoded), "base64"):
+            if decoded and detect(normalize(decoded), "base64", active):
                 findings.append(Finding("encoded_instruction", location, blob[:60]))
     return findings
 
@@ -266,16 +356,18 @@ def _neutralise_markup(text: str) -> str:
     return text.replace("<", "‹").replace(">", "›")
 
 
-def quarantine(raw: str, source: str, source_id: str) -> QuarantineResult:
+def quarantine(
+    raw: str, source: str, source_id: str, rules: Rules | None = None
+) -> QuarantineResult:
     visible_raw, hidden = extract(raw)
     findings: list[Finding] = []
     for location, segment in hidden:
-        findings.extend(detect(normalize(segment), location))
+        findings.extend(detect(normalize(segment), location, rules))
 
     kept: list[str] = []
     redacted = 0
     for sentence in split_sentences(normalize(visible_raw)):
-        hits = detect(sentence, "visible")
+        hits = detect(sentence, "visible", rules)
         if hits:
             findings.extend(hits)
             redacted += 1

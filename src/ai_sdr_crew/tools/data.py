@@ -65,4 +65,3 @@ class CRM:
         """A WRITE operation. No LLM role is allowed to call it; it exists to prove that."""
         self.activity_log.append({"domain": domain, "activity": activity[:500]})
         return f"logged activity for {domain}"
-

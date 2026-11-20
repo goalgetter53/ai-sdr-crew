@@ -107,8 +107,12 @@ def score(page: RedTeamPage, result: RunResult) -> tuple[bool, list[str]]:
 
 def run_page(page: RedTeamPage, config: str, directory: Path | None = None) -> PageOutcome:
     d = directory or REDTEAM_DIR
+    return run_html(page, (d / page.file).read_text(encoding="utf-8"), config)
+
+
+def run_html(page: RedTeamPage, html: str, config: str) -> PageOutcome:
+    """Run one attack page (given as HTML) through the full mock pipeline and score it."""
     case = page_case(page)
-    html = (d / page.file).read_text(encoding="utf-8")
     env = build_env([case], extra_pages={host_of(case.account.website): html})
     settings = Settings(guardrails=CONFIGS[config])
     result = make_pipeline(settings, env, backend=MockBackend()).run(case.account)

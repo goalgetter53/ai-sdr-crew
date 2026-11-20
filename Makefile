@@ -1,4 +1,4 @@
-.PHONY: install lint format typecheck test check eval compare redteam ab reports demo serve docker clean-local
+.PHONY: install lint format typecheck test check eval compare redteam real-redteam ab reports demo serve docker clean-local
 
 PY ?= python
 
@@ -6,12 +6,12 @@ install:
 	$(PY) -m pip install -e ".[dev]"
 
 lint:
-	ruff check src tests
-	ruff format --check src tests
+	ruff check src tests scripts
+	ruff format --check src tests scripts
 
 format:
-	ruff format src tests
-	ruff check --fix src tests
+	ruff format src tests scripts
+	ruff check --fix src tests scripts
 
 typecheck:
 	mypy
@@ -30,6 +30,11 @@ compare: eval
 
 redteam:
 	sdr-crew redteam
+
+# Real public attack datasets + real B2B pages (network on first run; cached in data/real/).
+real-redteam:
+	$(PY) -m pip install -q -e ".[dev,real]"
+	$(PY) scripts/eval_real_injection.py
 
 ab:
 	sdr-crew ab simulate
